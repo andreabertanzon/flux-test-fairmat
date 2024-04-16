@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: pong
+  labels:
+    app: pong
+  namespace: pingpong
+spec:
+  replicas: 1 
+  selector:
+    matchLabels:
+      app: pong
+  template:
+    metadata:
+      labels:
+        app: pong
+    spec:
+      containers:
+      - name: pong
+        image: gitlab.fairmat.com:5050/fairmat/dev/infrastructure/kubernetesdemo:pong-prod_1.3
+        ports:
+        - containerPort: 8080
+      imagePullSecrets:
+      - name: regcred
